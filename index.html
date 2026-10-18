@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>RANDOM by Fio</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header>
+        <p></p>
+
+        <h1>RANDOM by Fio ♡</h1>
+
+        <p>
+        </p>
+
+        <!-- TOMBOL MUSIK -->
+        <button id="musicButton" type="button">
+            ♫ Play our music
+        </button>
+
+        <audio id="backgroundMusic" src="Cinta Sesungguhnya - Sabhi Saddi.mp3" loop></audio>
+    </header>
+
+    <!-- GALERI FOTO -->
+    <main>
+        <section id="gallery">
+            <h2>My Gallery ♡</h2>
+
+            <div class="gallery-container">
+
+                <!-- FOTO 1 -->
+                <div class="photo-card">
+                    <img
+                        src="30.jpeg"
+                        alt="Foto pertama Fio"
+                        onclick="openPhoto(this.src)"
+                    >
+                    <p>by Fio</p>
+                </div>
+
+                <!-- FOTO 2 -->
+                <div class="photo-card">
+                    <img
+                        src="31.jpeg"
+                        alt="Foto kedua Fio"
+                        onclick="openPhoto(this.src)"
+                    >
+                    <p>by Fio</p>
+                </div>
+
+                <!-- FOTO 3 -->
+                <div class="photo-card">
+                    <img
+                        src="32.jpeg"
+                        alt="Foto ketiga Fio"
+                        onclick="openPhoto(this.src)"
+                    >
+                    <p>by Fio</p>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <!-- POPUP FOTO -->
+    <div
+        id="lightbox"
+        class="lightbox"
+        onclick="closePhoto()"
+    >
+        <button
+            type="button"
+            class="close-button"
+            aria-label="Tutup foto"
+            onclick="closePhoto()"
+        >
+            &times;
+        </button>
+
+        <img
+            id="lightboxImage"
+            src=""
+            alt="Foto diperbesar"
+            onclick="event.stopPropagation()"
+        >
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>♡ by Fio</p>
+        <p>© RANDOM by Fio</p>
+    </footer>
+
+    <!-- JAVASCRIPT -->
+    <script>
+        // MEMPERBESAR FOTO
+        function openPhoto(src) {
+            const lightbox = document.getElementById("lightbox");
+            const image = document.getElementById("lightboxImage");
+
+            image.src = src;
+            lightbox.classList.add("active");
+            document.body.style.overflow = "hidden";
+        }
+
+        // MENUTUP FOTO
+        function closePhoto() {
+            const lightbox = document.getElementById("lightbox");
+
+            lightbox.classList.remove("active");
+            document.body.style.overflow = "";
+        }
+
+        // MENUTUP FOTO DENGAN TOMBOL ESC
+        document.addEventListener("keydown", function(event) {
+            if (event.key === "Escape") {
+                closePhoto();
+            }
+        });
+
+        // TOMBOL MUSIK
+        const music = document.getElementById("backgroundMusic");
+        const musicButton = document.getElementById("musicButton");
+
+        musicButton.addEventListener("click", async function() {
+            if (music.paused) {
+                try {
+                    await music.play();
+                    musicButton.textContent = "♫ Pause our music";
+                } catch (error) {
+                    musicButton.textContent = "Musik gagal diputar";
+                }
+            } else {
+                music.pause();
+                musicButton.textContent = "♫ Play our music";
+            }
+        });
+    </script>
+
+</body>
+</html>
